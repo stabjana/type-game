@@ -142,14 +142,13 @@
       this[globalName] = mainExports;
     }
   }
-})({"lX4BT":[function(require,module,exports) {
+})({"bktDt":[function(require,module,exports) {
 "use strict";
-var global = arguments[3];
 var HMR_HOST = null;
-var HMR_PORT = null;
+var HMR_PORT = 1234;
 var HMR_SECURE = false;
-var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "7055c94b59712999";
+var HMR_ENV_HASH = "75217355ed20a7c9";
+module.bundle.HMR_BUNDLE_ID = "8f9db35f963c7b4c";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
   HMRAsset,
@@ -531,8 +530,84 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
-},{}],"4M6V8":[function(require,module,exports) {
+},{}],"eG8sm":[function(require,module,exports) {
+const RANDOM_QUOTE_API_URL = "https://quoteslate.vercel.app/api/quotes/random/";
+const quoteDisplayElement = document.getElementById("quoteDisplay");
+const quoteInputElement = document.getElementById("quoteInput");
+const timerElement = document.getElementById("timer");
+quoteInputElement.addEventListener("input", ()=>{
+    const arrayQuote = quoteDisplayElement.querySelectorAll("span");
+    const arrayValue = quoteInputElement.value.split("");
+    let correct = true;
+    arrayQuote.forEach((characterSpan, index)=>{
+        const character = arrayValue[index];
+        if (character == null) {
+            characterSpan.classList.remove("correct");
+            characterSpan.classList.remove("incorrect");
+            correct = false;
+        } else if (character === characterSpan.innerText) {
+            characterSpan.classList.add("correct");
+            characterSpan.classList.remove("incorrect");
+        } else {
+            characterSpan.classList.remove("correct");
+            characterSpan.classList.add("incorrect");
+            correct = false;
+        }
+    });
+    if (correct) renderNewQuote();
+});
+function getRandomQuote() {
+    return fetch(RANDOM_QUOTE_API_URL).then((response)=>response.json()).then((data)=>{
+        console.log(data); // Log the response to check its structure
+        return data.quote; // Access the correct property
+    }).catch((error)=>{
+        console.error("Error fetching quote:", error);
+        return null;
+    });
+}
+async function renderNewQuote() {
+    const quote = await getRandomQuote();
+    if (!quote) {
+        console.error("Failed to fetch quote");
+        return;
+    }
+    quoteDisplayElement.innerHTML = "";
+    quote.split("").forEach((character)=>{
+        const characterSpan = document.createElement("span");
+        characterSpan.innerText = character;
+        quoteDisplayElement.appendChild(characterSpan);
+    });
+    quoteInputElement.value = null;
+    startTimer();
+}
+async function renderNewQuote() {
+    const quote = await getRandomQuote();
+    if (!quote) {
+        console.error("Failed to fetch quote");
+        return;
+    }
+    quoteDisplayElement.innerHTML = "";
+    quote.split("").forEach((character)=>{
+        const characterSpan = document.createElement("span");
+        characterSpan.innerText = character;
+        quoteDisplayElement.appendChild(characterSpan);
+    });
+    quoteInputElement.value = null;
+    startTimer();
+}
+let startTime;
+function startTimer() {
+    timerElement.innerText = 0;
+    startTime = new Date();
+    setInterval(()=>{
+        timer.innerText = getTimerTime();
+    }, 1000);
+}
+function getTimerTime() {
+    return Math.floor((new Date() - startTime) / 1000);
+}
+renderNewQuote();
 
-},{}]},["lX4BT","4M6V8"], "4M6V8", "parcelRequire0296")
+},{}]},["bktDt","eG8sm"], "eG8sm", "parcelRequire0296")
 
-//# sourceMappingURL=JS-Speed-Typing-Game.59712999.js.map
+//# sourceMappingURL=index.963c7b4c.js.map

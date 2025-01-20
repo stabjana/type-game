@@ -47,7 +47,7 @@ body, .quote-input {
   outline: none;
   margin: auto;
   padding: .5rem 1rem;
-  font-size: 1rem;
+  font-size: 2rem;
 }
 
 .quote-input:focus {
@@ -63,4 +63,4 @@ body, .quote-input {
   text-decoration: underline;
 }
 
-/*# sourceMappingURL=index.4d663569.css.map */
+/*# sourceMappingURL=index.758bed8e.css.map */
