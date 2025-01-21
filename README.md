@@ -1,4 +1,4 @@
-Typing Game
+# Typing Game
 
 - Uses random quotable.io api
 - Deployed using AWS CodePipeline and AWS BeanStalk
